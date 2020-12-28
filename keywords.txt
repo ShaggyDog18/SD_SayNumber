@@ -1,0 +1,33 @@
+#######################################
+# Syntax Coloring Map SD_SayNumber
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+SayNumber	KEYWORD1
+Say		KEYWORD1
+SD_SayNumber 	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+sayNumber	KEYWORD2
+sayAny		KEYWORD2
+sayAsyncMode	KEYWORD2
+setLanguage	KEYWORD2
+getLanguage	KEYWORD2
+setMode		KEYWORD2
+getMode		KEYWORD2
+clearQueue	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+MODE_SYNC	LITERAL1
+MODE_ASYNC	LITERAL1
+ENGLISH_MALE	LITERAL1
+ENGLISH_FEMALE	LITERAL1
+UKRAINIAN_MALE	LITERAL1
+UKRAINIAN_FEMALE	LITERAL1
+
