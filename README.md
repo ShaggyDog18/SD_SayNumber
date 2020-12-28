@@ -6,7 +6,7 @@ github: https://github.com/ShaggyDog18/SD_SayNumber
 
 License: [GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/)
 
-The library allows to pronounce an integer number from the range of *-999,999* to *999,999* in English or Ukrainian, male or female voices by a [DFPlayer MP3 audio Player](https://www.dfrobot.com/index.php?route=product/product&product_id=1121) in a *synchronous* (blocking) or *asynchronous* (non-blocking) modes.
+The library allows to pronounce an integer number from the range of **-999,999** to **999,999** in English or Ukrainian, male or female voices by a [DFPlayer MP3 audio Player](https://www.dfrobot.com/index.php?route=product/product&product_id=1121) in a **synchronous** (blocking) or **asynchronous** (non-blocking) modes.
 
 Any prefix/postfix messages can be easily added. So far, meters, kilometers and miles are included to the set of the MP3 files provided in the sdcard folder.
 
@@ -21,23 +21,23 @@ The library uses:
 
 ## Library Methods
 
-- `SayNumber( uint8_t busyPin, uint8_t language, bool mode)` - Class Constructor, defines *Busy* pin, *language* and *play mode*.
+- `SayNumber(uint8_t busyPin, uint8_t language, bool mode)` - Class Constructor, defines *Busy* pin, *language* and *play mode*.
 
-- `bool sayNumber( int32_t number, DFRobotDFPlayerMini& myDFPlayer )` - pronounces an integer number from the range of *-999,999* to *999,999* (6 digits lenghts). Returns *true* if a message was played OK (in sync mode) or queue is not overflowed (in asynchronous mode). Returns *false* if playing issues or the queue is full in async mode.
+- `bool sayNumber(int32_t number, DFRobotDFPlayerMini& myDFPlayer)` - pronounces an integer number from the range of *-999,999* to *999,999* (6 digits lenghts). Returns *true* if a message was played OK (in sync mode) or queue is not overflowed (in asynchronous mode). Returns *false* if playing issues or the queue is full in async mode.
 
-- `bool sayAny( uint8_t say, DFRobotDFPlayerMini& myDFPlayer )` - pronounces any MP3 file/message by its number; mp3 files should be named as 001.mp3-255.mp3 according to DFPlayer message naming convention (please, refer to the player [datasheet](https://github.com/DFRobot/DFRobotDFPlayerMini/blob/master/doc/FN-M16P%2BEmbedded%2BMP3%2BAudio%2BModule%2BDatasheet.pdf)). Usually the method is used to pronounce prefix/postfix for the number like meters/kilometers/miles, etc. Returns *true* if a message was played OK (in synch mode), or the queue is not overflowed (in the async mode). Returns *false* if issues or the queue is full.
+- `bool sayAny(uint8_t say, DFRobotDFPlayerMini& myDFPlayer)` - pronounces any MP3 file/message by its number; mp3 files should be named as 001.mp3-255.mp3 according to DFPlayer message naming convention (please, refer to the player [datasheet](https://github.com/DFRobot/DFRobotDFPlayerMini/blob/master/doc/FN-M16P%2BEmbedded%2BMP3%2BAudio%2BModule%2BDatasheet.pdf)). Usually the method is used to pronounce prefix/postfix for the number like meters/kilometers/miles, etc. Returns *true* if a message was played OK (in synch mode), or the queue is not overflowed (in the async mode). Returns *false* if issues or the queue is full.
 
-- `bool sayAsyncMode( DFRobotDFPlayerMini& myDFPlayer )` - pronounces a pre-constructed message of several MP3 files in an asynchronous non-blocking mode. The message construction is performed by sayNumber() and sayAny() methods. Returns *true* if player has started playing MP3 file getting it from the queue. Returns *false* if the player is still busy playing a message, or the queue is empty and there is nothing to play.
+- `bool sayAsyncMode(DFRobotDFPlayerMini& myDFPlayer)` - pronounces a pre-constructed message of several MP3 files in an asynchronous non-blocking mode. The message construction is performed by **sayNumber()** and **sayAny()** methods. Returns *true* if player has started playing MP3 file getting it from the queue. Returns *false* if the player is still busy playing a message, or the queue is empty and there is nothing to play.
 
-- `void setLanguage( uint8_t language )` - sets the language.
+- `void setLanguage(uint8_t language)` - sets the language.
 
-- `uint8_t getLanguage ( void )` - returns the current language.
+- `uint8_t getLanguage(void)` - returns the current language.
 
-- `void setMode( bool mode )` - sets the mode, either synch or async.
+- `void setMode(bool mode)` - sets the mode, either synch or async.
 
-- `bool getMode( void )`- returns the current mode.
+- `bool getMode(void)`- returns the current mode.
 
-- `void clearQueue( void )` - clears the queue in case of issues.
+- `void clearQueue(void)` - clears the queue in case of issues.
 
 ## Synchronous and Asynchronous Modes
 
