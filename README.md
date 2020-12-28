@@ -27,7 +27,7 @@ The library uses:
 
 - `bool sayAny(uint8_t say, DFRobotDFPlayerMini& myDFPlayer)` - pronounces any MP3 file/message by its number; mp3 files should be named as 001.mp3-255.mp3 according to DFPlayer message naming convention (please, refer to the player [datasheet](https://github.com/DFRobot/DFRobotDFPlayerMini/blob/master/doc/FN-M16P%2BEmbedded%2BMP3%2BAudio%2BModule%2BDatasheet.pdf)). Usually **sayAny** method is used to pronounce prefix/postfix for the number like meters/kilometers/miles, etc. Returns *true* if a message was played OK (in synch mode), or the queue is not overflowed (in the async mode). Returns *false* if issues or the queue is full.
 
-- `bool sayAsyncMode(DFRobotDFPlayerMini& myDFPlayer)` - pronounces a pre-constructed message of several MP3 files in an asynchronous non-blocking mode. The message construction is performed by **sayNumber()** and **sayAny()** methods. Returns *true* if player has started playing MP3 file getting it from the queue. Returns *false* if the player is still busy playing a message, or the queue is empty and there is nothing to play.
+- `bool sayAsyncMode(DFRobotDFPlayerMini& myDFPlayer)` - pronounces a pre-constructed message that may consist of several MP3 files in an asynchronous non-blocking mode. The message construction is performed by **sayNumber()** and **sayAny()** methods. Returns *true* if player has started playing MP3 file getting it from the queue. Returns *false* if the player is still busy playing a message, or the queue is empty and there is nothing to play.
 
 - `void setLanguage(uint8_t language)` - sets the language.
 
@@ -51,7 +51,7 @@ You may also extend the length of the queue (in the SD_SayNumber.h file), but be
 
 ### Synchronous Mode
 
-Playing messages in **Synchronous** mode means the main application cycle is blocked for the time while the entire message that may consists of several MP3 files is being played. 
+Playing messages in **Synchronous** mode means the main application cycle is blocked for the time while the entire message is being played.
 
 Both modes can be used in one application. Refer to the library example in which a synch mode is used in *setup()* function, while the asynch mode is used in the *loop()* function.
 
