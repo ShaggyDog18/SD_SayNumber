@@ -64,7 +64,7 @@ For more details on the library use, please, refer to the example that utilizes 
 
 ## Compatibility
 
-The library developed for Arduino UNO/NANO/Pro Mini, ESP8266, ESP32, STM32, etc.
+The library was developed for Arduino UNO/NANO/Pro Mini, ESP8266, ESP32, STM32, etc.
 
 ## Gratitude
 
