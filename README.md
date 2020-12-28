@@ -47,7 +47,7 @@ The main differentiator of the **SD_SayNumber** library is its ability to pronou
 
 It is important to maintain enough time for the whole audio message to be played in the async mode before the next message pops up to prevent the queue overflow. Otherwise, the message may be jammed. If so, call a **clearQueue()** method to resolve the issue and start over (refer to the library example).
 
-You may also extend the length of the queue (in the SD_SayNumber.h file), but it's better to maintain the right timing between messages.
+You may extend the length of the queue (in the SD_SayNumber.h file), but it's better to maintain the right timing between messages. Currently, the length of the queue is 18 bytes which is double of what is required to pronounce the lartgest number 999,999: "nine hundred ninety nine thousand nine hundred ninety nine" that engages nine MP3 files.
 
 ### Synchronous Mode
 
@@ -58,7 +58,7 @@ Both modes can be used in one application. Refer to the library example in which
 ## DFPlayer Connection
 
 Module is connected to UART interface (RX-TX) according to [datasheet](https://github.com/DFRobot/DFRobotDFPlayerMini/blob/master/doc/FN-M16P%2BEmbedded%2BMP3%2BAudio%2BModule%2BDatasheet.pdf). 
-A **BUSY** pin of the DFPlyer is also used to monitor the Player status: the pin signals if the player is idle and ready to play the next mp3 file (pin is high), or it is currently busy playing a file (pin is low).
+A **Busy** pin of the DFPlyer is used to monitor the Player status: the **Busy** pin signals the player is idle and ready to play the next mp3 file (pin is high), or it is currently busy playing a file (pin is low).
 
 For more details on the library use, please, refer to the example that utilizes all library methods.
 
