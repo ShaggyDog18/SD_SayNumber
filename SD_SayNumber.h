@@ -40,12 +40,13 @@
 #define SAY_THOUSAND 101
 #define SAY_ZERO  120
 #define SAY_MINUS 121
+#define SAY_POINT 122
 
 // for speed and distance
-#define SAY_KM    122
-#define SAY_KMH   123  // not in the library
+#define SAY_KM    123
 #define SAY_METER 124
 #define SAY_MILE  125
+#define SAY_KMH   125  // not in the library
 #define SAY_MILEH 126  // not in the library
 #define SAY_PERCENT  127  // not in the library
 #define SAY_DEGREES  128  // not in the library
@@ -63,7 +64,9 @@ class SayNumber {
   public:
     SayNumber( uint8_t busyPin = 0, uint8_t language = ENGLISH_MALE, bool mode = MODE_SYNC );
       
-    bool sayNumber( int32_t number, DFRobotDFPlayerMini& myDFPlayer );
+    bool sayInteger( int32_t number, DFRobotDFPlayerMini& myDFPlayer );
+	
+	bool sayFloat( float number, DFRobotDFPlayerMini& myDFPlayer );
 
     bool sayAny( uint8_t say, DFRobotDFPlayerMini& myDFPlayer );
 

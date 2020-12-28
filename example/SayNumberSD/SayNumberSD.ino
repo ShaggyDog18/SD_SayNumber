@@ -38,9 +38,25 @@ void setup() {
 
   Serial.println(F("---Sync mode: block the cycle while is talking---"));
 
+  Serial.println(F("---Say Float number---"));
+  float floatNumber = 175.35F;
+  Serial.print( "Say:" ); Serial.print( floatNumber ); Serial.print( ":" );
+  Say.sayFloat( floatNumber, myDFPlayer );
+  delay(500);
+  
+  floatNumber = -6.041F;
+  Serial.print( "Say:" ); Serial.print( floatNumber ); Serial.print( ":" );
+  Say.sayFloat( floatNumber, myDFPlayer );
+  delay(500);
+
+  floatNumber = 11.50F;
+  Serial.print( "Say:" ); Serial.print( floatNumber ); Serial.print( ":" );
+  Say.sayFloat( floatNumber, myDFPlayer );
+  delay(500);
+
   for ( int32_t i = -3; i < 1023; i++ ) {
     Serial.print( "Say:" ); Serial.print(i); Serial.print( ":" );
-    bool errorStatus = Say.sayNumber( i, myDFPlayer );
+    bool errorStatus = Say.sayInteger( i, myDFPlayer );
     if ( i > 1 && i <= 3 ) errorStatus *= Say.sayAny( SAY_KM, myDFPlayer );
     else if ( i > 3 && i <= 6 ) errorStatus *= Say.sayAny( SAY_METER, myDFPlayer );
     else if ( i > 6 && i <= 9 ) errorStatus *= Say.sayAny( SAY_MILE, myDFPlayer );
@@ -55,13 +71,14 @@ void setup() {
     if ( i == 705) i = 797;
     if ( i == 805) i = 897;
     if ( i == 905) i = 997;
+    delay(100);
   }
   Serial.println("-----");
 
   /*
     for ( int32_t i = 998; i < 1125; i++ ) {
     Serial.print( "Say:" ); Serial.print(i); Serial.print( ":" );
-    bool status = Say.sayNumber( i, myDFPlayer );
+    bool status = Say.sayInteger( i, myDFPlayer );
     Serial.println();
     }
     Serial.println("-----");
@@ -70,7 +87,7 @@ void setup() {
   /*
     for ( int32_t i = 9998; i < 11125; i++ ) {
     Serial.print( "Say:" ); Serial.print(i); Serial.print( ":" );
-    bool status = Say.sayNumber(i, myDFPlayer );
+    bool status = Say.sayInteger(i, myDFPlayer );
     Serial.println();
     }
     Serial.println("-----");
@@ -78,7 +95,7 @@ void setup() {
   /*
     for ( int32_t i = 19998; i < 22125; i++ ) {
     Serial.print( "Say:" ); Serial.print(i); Serial.print( ":" );
-    bool status = Say.sayNumber( i, myDFPlayer );
+    bool status = Say.sayInteger( i, myDFPlayer );
     Serial.println();
     }
     Serial.println("-----");
@@ -86,7 +103,7 @@ void setup() {
   /*
     for ( int32_t i = 99998; i < 101135; i++ ) {
     Serial.print( "Say:" ); Serial.print(i); Serial.print( ":" );
-    bool status = Say.sayNumber( i, myDFPlayer );
+    bool status = Say.sayInteger( i, myDFPlayer );
     Serial.println();
     }
     Serial.println("-----");
@@ -94,7 +111,7 @@ void setup() {
   /*
     for ( int32_t i = 999998; i < 1000000; i++ ) {
       Serial.print( "Say:" ); Serial.print(i); Serial.print( ":" );
-      bool status = Say.sayNumber( i, myDFPlayer );
+      bool status = Say.sayInteger( i, myDFPlayer );
       Serial.println();
     }
     Serial.println("-----");
@@ -125,7 +142,7 @@ void loop() {
   currTime = millis();
   if ( currTime - prevTime >= timeSpan ) {
     Serial.print( "\nSay async:" ); Serial.print(num2say); Serial.print( ":" );
-    if ( Say.sayNumber(  num2say, myDFPlayer ) ) {
+    if ( Say.sayInteger(  num2say, myDFPlayer ) ) {
       // returns *true* if the queue is not overflowed. So, gets to the next number to pronounce
       // Returns *false* if the queue is full; So, skip till the next time span
       num2say++;

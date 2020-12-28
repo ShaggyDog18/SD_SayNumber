@@ -12,7 +12,8 @@ SD_SayNumber 	KEYWORD1
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
-sayNumber	KEYWORD2
+sayInteger	KEYWORD2
+sayFloat	KEYWORD2
 sayAny		KEYWORD2
 sayAsyncMode	KEYWORD2
 setLanguage	KEYWORD2

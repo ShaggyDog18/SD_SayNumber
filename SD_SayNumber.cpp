@@ -11,6 +11,7 @@ SayNumber::SayNumber( uint8_t busyPin, uint8_t language, bool mode ): _busyPin(b
   pinMode( _busyPin, INPUT );
 }
 
+
 bool SayNumber::sayAny( uint8_t say, DFRobotDFPlayerMini& myDFPlayer ){
   bool errorState = true;
   if( _mode ) {
@@ -22,12 +23,13 @@ bool SayNumber::sayAny( uint8_t say, DFRobotDFPlayerMini& myDFPlayer ){
   return errorState;
 }
 
-bool SayNumber::sayNumber( int32_t x, DFRobotDFPlayerMini& myDFPlayer ) {
+
+bool SayNumber::sayInteger( int32_t x, DFRobotDFPlayerMini& myDFPlayer ) {
   uint8_t digits[N_DIGITS] = {0, 0, 0, 0, 0, 0};  // max number 999,999; 
   bool errorState = true; // true - means OK, no error
 
   if( x > MAX_NUMBER || x < -MAX_NUMBER ) 
-    return false;
+    return false;  // the number is out of range
   else if( x < 0 ) {
     errorState *= sayAny( SAY_MINUS, myDFPlayer );
     x = - x;
@@ -59,6 +61,7 @@ bool SayNumber::sayNumber( int32_t x, DFRobotDFPlayerMini& myDFPlayer ) {
     case 1:
     case 0: errorState *= say10( &digits[4], myDFPlayer );
   }
+
   #ifdef DEBUG
     if( !_mode ) {
       Serial.print("Queue length: "); Serial.println( playQueue.count() );
@@ -68,8 +71,27 @@ bool SayNumber::sayNumber( int32_t x, DFRobotDFPlayerMini& myDFPlayer ) {
 }
 
 
+bool SayNumber::sayFloat( float number, DFRobotDFPlayerMini& myDFPlayer ) {
+	bool errorState = true;
+	
+	if( number < 0.0f ) {
+		errorState = sayAny( SAY_MINUS, myDFPlayer );
+		number = - number;
+	}
+
+	int32_t intPart = (int) number;
+	int32_t decPart = (int) (100*(number - intPart));
+	
+	errorState *= sayInteger( intPart, myDFPlayer );
+	errorState *= sayAny( SAY_POINT, myDFPlayer );
+	errorState *= sayInteger( decPart, myDFPlayer );
+	return errorState;
+}
+
+
 bool SayNumber::say1000( uint8_t digits[], DFRobotDFPlayerMini& myDFPlayer ) {
   bool errorState;
+
   errorState = say10( &digits[0], myDFPlayer );
   #ifdef DEBUG
     Serial.print( " thousand " );
@@ -77,6 +99,7 @@ bool SayNumber::say1000( uint8_t digits[], DFRobotDFPlayerMini& myDFPlayer ) {
   errorState *= sayAny( SAY_THOUSAND, myDFPlayer );
   return errorState;
 }
+
 
 bool SayNumber::say100( uint8_t digits[], DFRobotDFPlayerMini& myDFPlayer ) {
   bool errorState;
@@ -93,7 +116,7 @@ bool SayNumber::say100( uint8_t digits[], DFRobotDFPlayerMini& myDFPlayer ) {
       
     default:  // ENGLISH, SPANISH, ITALIAN....
       errorState = say1( &digits[0], myDFPlayer );
-      if ( digits[0] ) {
+      if( digits[0] ) {
 		#ifdef DEBUG
 			Serial.print( " hundred " );
 		#endif
@@ -103,17 +126,19 @@ bool SayNumber::say100( uint8_t digits[], DFRobotDFPlayerMini& myDFPlayer ) {
   return errorState;
 }
 
+
 bool SayNumber::say10( uint8_t digits[], DFRobotDFPlayerMini& myDFPlayer ) {
   bool errorState = true;
-  if ( digits[0] == 1 ) { //11-19
+
+  if( digits[0] == 0 )  // 1...9
+    errorState *= say1( &digits[1], myDFPlayer ); 
+  else if( digits[0] == 1 ) { //11-19
     #ifdef DEBUG
       sprintf(temp, "%03d", 10 + digits[1] );
       Serial.print( temp ); //10-19
       Serial.print( "." );
     #endif
     errorState *= sayAny(  10+digits[1], myDFPlayer );
-  } else if( digits[0] == 0 ) {  // 1...9
-    errorState *= say1( &digits[1], myDFPlayer ); 
   } else {  //20,30,40...90
     #ifdef DEBUG
       sprintf(temp, "%03d", 10*digits[0] );
@@ -126,18 +151,20 @@ bool SayNumber::say10( uint8_t digits[], DFRobotDFPlayerMini& myDFPlayer ) {
   return errorState;
 }
 
+
 bool SayNumber::say1( uint8_t digits[], DFRobotDFPlayerMini& myDFPlayer ) {
   bool errorState = true;
-  if ( digits[0] ) {
+  if( digits[0] ) {
     #ifdef DEBUG
       sprintf(temp, "%03d", digits[0] );
       Serial.print(temp);
       Serial.print( "-" );
     #endif
     errorState *= sayAny( digits[0], myDFPlayer );
-  }
+  } 
   return errorState;
 }
+
 
 void SayNumber::playerDelayWhilePlaying( void ){
   delay(100);
@@ -147,6 +174,7 @@ void SayNumber::playerDelayWhilePlaying( void ){
     }
   }
 }
+
 
 bool SayNumber::sayAsyncMode( DFRobotDFPlayerMini& myDFPlayer ) {
   // if query is not empty && digitalRead( _busyPin )  
