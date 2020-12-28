@@ -1,7 +1,6 @@
 #include "SD_SayNumber.h"
 
 //#define DEBUG
-#define PLAY
 
 #ifdef DEBUG
   char temp[9];
@@ -17,7 +16,7 @@ bool SayNumber::sayAny( uint8_t say, DFRobotDFPlayerMini& myDFPlayer ){
   if( _mode ) {
     myDFPlayer.playFolder( _language, say ); //play specific mp3 in SD:/15/004.mp3; Folder Name(1~99); File Name(1~255)
     playerDelayWhilePlaying();
-  } else{
+  } else {
     errorState *= playQueue.push( say );
   }
   return errorState;
@@ -25,7 +24,6 @@ bool SayNumber::sayAny( uint8_t say, DFRobotDFPlayerMini& myDFPlayer ){
 
 bool SayNumber::sayNumber( int32_t x, DFRobotDFPlayerMini& myDFPlayer ) {
   uint8_t digits[N_DIGITS] = {0, 0, 0, 0, 0, 0};  // max number 999,999; 
-  uint8_t decade = 0;
   bool errorState = true; // true - means OK, no error
 
   if( x > MAX_NUMBER || x < -MAX_NUMBER ) 
@@ -38,6 +36,7 @@ bool SayNumber::sayNumber( int32_t x, DFRobotDFPlayerMini& myDFPlayer ) {
   } 
 
   // split a number to digits
+  uint8_t decade = 0;
   do {
     digits[N_DIGITS - decade - 1] = x % 10;
     decade++;
@@ -61,7 +60,7 @@ bool SayNumber::sayNumber( int32_t x, DFRobotDFPlayerMini& myDFPlayer ) {
     case 0: errorState *= say10( &digits[4], myDFPlayer );
   }
   #ifdef DEBUG
-    if(!_mode) {
+    if( !_mode ) {
       Serial.print("Queue length: "); Serial.println( playQueue.count() );
     }
   #endif
@@ -75,9 +74,7 @@ bool SayNumber::say1000( uint8_t digits[], DFRobotDFPlayerMini& myDFPlayer ) {
   #ifdef DEBUG
     Serial.print( " thousand " );
   #endif
-  #ifdef PLAY
-    errorState *= sayAny( SAY_THOUSAND, myDFPlayer );
-  #endif
+  errorState *= sayAny( SAY_THOUSAND, myDFPlayer );
   return errorState;
 }
 
@@ -91,17 +88,13 @@ bool SayNumber::say100( uint8_t digits[], DFRobotDFPlayerMini& myDFPlayer ) {
     case POLISH_FEMALE:
     case RUSSIAN_MALE:
     case RUSSIAN_FEMALE:
-      #ifdef PLAY
-        errorState = sayAny( 200+digits[0], myDFPlayer );  // 100, 200, 300, 400,...900 recorded to files 201, 201, 203, 204, 209 correspondigly
-      #endif
+      errorState = sayAny( 200+digits[0], myDFPlayer );  // 100, 200, 300, 400,...900 recorded to files 201, 201, 203, 204, 209 correspondigly
       break;
       
     default:  // ENGLISH, SPANISH, ITALIAN....
       errorState = say1( &digits[0], myDFPlayer );
       if ( digits[0] ) {
-        #ifdef PLAY
-          errorState *= sayAny( SAY_HUNDRED, myDFPlayer );
-        #endif  
+        errorState *= sayAny( SAY_HUNDRED, myDFPlayer );
       }
   }
   return errorState;
@@ -115,9 +108,7 @@ bool SayNumber::say10( uint8_t digits[], DFRobotDFPlayerMini& myDFPlayer ) {
       Serial.print( temp ); //10-19
       Serial.print( "." );
     #endif
-    #ifdef PLAY
-      errorState *= sayAny(  10+digits[1], myDFPlayer );
-    #endif
+    errorState *= sayAny(  10+digits[1], myDFPlayer );
   } else if( digits[0] == 0 ) {  // 1...9
     errorState *= say1( &digits[1], myDFPlayer ); 
   } else {  //20,30,40...90
@@ -126,9 +117,7 @@ bool SayNumber::say10( uint8_t digits[], DFRobotDFPlayerMini& myDFPlayer ) {
       Serial.print( temp ); //20, 30...90
       Serial.print( "^" );
     #endif
-    #ifdef PLAY
-      errorState *= sayAny( 10*digits[0], myDFPlayer );
-    #endif
+    errorState *= sayAny( 10*digits[0], myDFPlayer );
     errorState *= say1( &digits[1], myDFPlayer );  // 1...9
   }
   return errorState;
@@ -142,9 +131,7 @@ bool SayNumber::say1( uint8_t digits[], DFRobotDFPlayerMini& myDFPlayer ) {
       Serial.print(temp);
       Serial.print( "-" );
     #endif
-    #ifdef PLAY
-      errorState *= sayAny( digits[0], myDFPlayer );
-    #endif  
+    errorState *= sayAny( digits[0], myDFPlayer );
   }
   return errorState;
 }
