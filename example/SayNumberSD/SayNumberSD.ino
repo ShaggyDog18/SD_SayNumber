@@ -132,7 +132,9 @@ void loop() {
     } else {
       // count false cases
       countFalse++;
+      Serial.println( "--Queue overflow--" );
       if ( countFalse >= 5 ) { // if count 5 errors, then clear the queue to fix the issue. Some parts of the previous message may be lost
+        Serial.println( "--Clearing the Queue--" );
         Say.clearQueue();
         countFalse = 0;
       }

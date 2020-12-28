@@ -94,6 +94,9 @@ bool SayNumber::say100( uint8_t digits[], DFRobotDFPlayerMini& myDFPlayer ) {
     default:  // ENGLISH, SPANISH, ITALIAN....
       errorState = say1( &digits[0], myDFPlayer );
       if ( digits[0] ) {
+		#ifdef DEBUG
+			Serial.print( " hundred " );
+		#endif
         errorState *= sayAny( SAY_HUNDRED, myDFPlayer );
       }
   }
