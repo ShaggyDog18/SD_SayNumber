@@ -43,7 +43,7 @@ The library uses:
 
 ### Asynchronous Mode
 
-The main differentiator of the **SD_SayNumber** library is its ability to pronounce numbers and audio messages in an **Asynchronous** non-blocking mode: the audio message is constructed of several MP3 files and pushed to the queue by **sayNumber()** and/or **sayAny()** methods. Then, MP3 files are pronounced in asynchronous non-blocking mode by **sayAsyncMode()** method called each cycle at the end of the *loop()* function. The main application cycle runs unblocked while MP3 files comprising the message are being played one by one taken from the queue. A consequent MP3 file is played as soon as playing of a previous MP3 file is completed.
+The main differentiator of the **SD_SayNumber** library is its ability to pronounce numbers and audio messages in an **Asynchronous** non-blocking mode: the audio message is constructed of several MP3 files and pushed to the queue by **sayNumber()** and/or **sayAny()** methods. Then, MP3 files are pronounced in asynchronous non-blocking mode by **sayAsyncMode()** method called each cycle at the end of the *loop()* function. The main application cycle runs unblocked while MP3 files comprising the message are being played one by one taken from the queue. A consequent MP3 file is played as soon as playing of the current MP3 file is completed.
 
 It is important to maintain enough time for the whole message to be played in the async mode before the next message pops up to prevent the queue overflow. Otherwise, the message may be jammed. If so, call a **clearQueue()** method to resolve the issue and start over (refer to the library example).
 
