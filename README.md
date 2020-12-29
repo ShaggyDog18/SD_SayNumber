@@ -11,7 +11,8 @@ The library allows to pronounce both integer numbers in the range of **-999,999*
 Any prefix/postfix messages can be easily added. So far, meters, kilometers and miles are included to the set of the MP3 files provided in the sdcard folder.
 
 The library is compact and efficient, can run on uControllers with limited resources.
-Inhale life to your applictions :-)
+
+Inhale life to your applications :-)
 
 ## Resources
 
