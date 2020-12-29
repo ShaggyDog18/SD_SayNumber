@@ -40,17 +40,17 @@ void setup() {
 
   Serial.println(F("---Say Float numbers---"));
   float floatNumber = 175.35F;
-  Serial.print( "Say:" ); Serial.print( floatNumber ); Serial.print( ":" );
+  Serial.print( "Say:" ); Serial.print( floatNumber ); Serial.println( ":" );
   Say.sayFloat( floatNumber, FLOAT_POINT_TWO, myDFPlayer );
   delay(500);
   
   floatNumber = -6.241F;
-  Serial.print( "Say:" ); Serial.print( floatNumber ); Serial.print( ":" );
+  Serial.print( "Say:" ); Serial.print( floatNumber ); Serial.println( ":" );
   Say.sayFloat( floatNumber, FLOAT_POINT_TWO, myDFPlayer );
   delay(500);
 
   floatNumber = 11.50F;
-  Serial.print( "Say:" ); Serial.print( floatNumber ); Serial.print( ":" );
+  Serial.print( "Say:" ); Serial.print( floatNumber ); Serial.println( ":" );
   Say.sayFloat( floatNumber, FLOAT_POINT_ONE, myDFPlayer );
   delay(500);
 

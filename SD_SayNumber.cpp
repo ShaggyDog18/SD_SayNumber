@@ -12,13 +12,13 @@ SayNumber::SayNumber( uint8_t busyPin, uint8_t language, bool mode ): _busyPin(b
 }
 
 
-bool SayNumber::sayAny( uint8_t say, DFRobotDFPlayerMini& myDFPlayer ){
+bool SayNumber::sayAny( uint8_t say, DFRobotDFPlayerMini& myDFPlayer ) {
   bool errorState = true;
   if( _mode ) {
     myDFPlayer.playFolder( _language, say ); //play specific mp3 in SD:/15/004.mp3; Folder Name(1~99); File Name(1~255)
     playerDelayWhilePlaying();
   } else {
-    errorState *= playQueue.push( say );
+    errorState = playQueue.push( say );
   }
   return errorState;
 }
@@ -33,7 +33,7 @@ bool SayNumber::sayInteger( int32_t x, DFRobotDFPlayerMini& myDFPlayer ) {
   else if( x == 0 )
     return sayAny( SAY_ZERO, myDFPlayer );  // say Zero
   else if( x < 0 ) {
-    errorState *= sayAny( SAY_MINUS, myDFPlayer );  // say Minus
+    errorState = sayAny( SAY_MINUS, myDFPlayer );  // say Minus
     x = - x;
   }
 
@@ -132,24 +132,24 @@ bool SayNumber::say100( uint8_t digits[], DFRobotDFPlayerMini& myDFPlayer ) {
 
 
 bool SayNumber::say10( uint8_t digits[], DFRobotDFPlayerMini& myDFPlayer ) {
-  bool errorState = true;
+  bool errorState;
 
   if( digits[0] == 0 )  // 1...9
-    errorState *= say1( &digits[1], myDFPlayer ); 
+    errorState = say1( &digits[1], myDFPlayer ); 
   else if( digits[0] == 1 ) { //11-19
     #ifdef DEBUG
       sprintf(temp, "%03d", 10 + digits[1] );
       Serial.print( temp ); //10-19
       Serial.print( "." );
     #endif
-    errorState *= sayAny(  10+digits[1], myDFPlayer );
+    errorState = sayAny(  10+digits[1], myDFPlayer );
   } else {  //20,30,40...90
     #ifdef DEBUG
       sprintf(temp, "%03d", 10*digits[0] );
       Serial.print( temp ); //20, 30...90
       Serial.print( "^" );
     #endif
-    errorState *= sayAny( 10*digits[0], myDFPlayer );
+    errorState = sayAny( 10*digits[0], myDFPlayer );
     errorState *= say1( &digits[1], myDFPlayer );  // 1...9
   }
   return errorState;
@@ -164,13 +164,13 @@ bool SayNumber::say1( uint8_t digits[], DFRobotDFPlayerMini& myDFPlayer ) {
       Serial.print(temp);
       Serial.print( "-" );
     #endif
-    errorState *= sayAny( digits[0], myDFPlayer );
+    errorState = sayAny( digits[0], myDFPlayer );
   } 
   return errorState;
 }
 
 
-void SayNumber::playerDelayWhilePlaying( void ){
+void SayNumber::playerDelayWhilePlaying( void ) {
   delay(100);
   if( _busyPin ) {
     while( !digitalRead( _busyPin ) ){  // low means busy
