@@ -25,7 +25,9 @@ The library uses:
 
 - `bool sayInteger(int32_t number, DFRobotDFPlayerMini& myDFPlayer)` - pronounces integer numbers in the range of *-999,999* to *999,999* (6 digits lenghts). Returns *true* if a message was played OK (in sync mode) or queue is not overflowed (in asynchronous mode). Returns *false* if playing issues or the queue is full in async mode.
 
-- `bool sayFloat(float number, DFRobotDFPlayerMini& myDFPlayer)` - pronounces float numbers in the range of *-999,999.99* to *999,999.99* (6 digits integer part and 2 digits decimal part). Returns *true* if a message was played OK (in sync mode) or queue is not overflowed (in asynchronous mode). Returns *false* if playing issues or the queue is full in async mode.
+- `bool sayFloat(float number, uint8_t floatDecPrecision, DFRobotDFPlayerMini& myDFPlayer)` - pronounces float numbers in the range of *-999,999.99* to *999,999.99* (6 digits integer part and either one or two digits decimal part). Use a float decimal precision constant *FLOAT_POINT_ONE* for one digit after the dot, or *FLOAT_POINT_TWO* for two digits. Returns *true* if a message was played OK (in sync mode) or queue is not overflowed (in asynchronous mode). Returns *false* if playing issues or the queue is full in async mode. 
+
+Note: Be aware, that adding *float* to your application will result in immediate increase of your sketch size by ~2.5kBytes. Try to avoid *float* data type if uController's resources are scarce.  
 
 - `bool sayAny(uint8_t say, DFRobotDFPlayerMini& myDFPlayer)` - pronounces any MP3 file/message by its number; mp3 files should be named as 001.mp3-255.mp3 according to DFPlayer message naming convention (please, refer to the player [datasheet](https://github.com/DFRobot/DFRobotDFPlayerMini/blob/master/doc/FN-M16P%2BEmbedded%2BMP3%2BAudio%2BModule%2BDatasheet.pdf)). Usually **sayAny** method is used to pronounce prefix/postfix for the number like meters/kilometers/miles, etc. Returns *true* if a message was played OK (in synch mode), or the queue is not overflowed (in the async mode). Returns *false* if issues or the queue is full.
 

@@ -41,17 +41,17 @@ void setup() {
   Serial.println(F("---Say Float number---"));
   float floatNumber = 175.35F;
   Serial.print( "Say:" ); Serial.print( floatNumber ); Serial.print( ":" );
-  Say.sayFloat( floatNumber, myDFPlayer );
+  Say.sayFloat( floatNumber, FLOAT_POINT_ONE, myDFPlayer );
   delay(500);
   
-  floatNumber = -6.041F;
+  floatNumber = -6.241F;
   Serial.print( "Say:" ); Serial.print( floatNumber ); Serial.print( ":" );
-  Say.sayFloat( floatNumber, myDFPlayer );
+  Say.sayFloat( floatNumber, FLOAT_POINT_TWO, myDFPlayer );
   delay(500);
 
   floatNumber = 11.50F;
   Serial.print( "Say:" ); Serial.print( floatNumber ); Serial.print( ":" );
-  Say.sayFloat( floatNumber, myDFPlayer );
+  Say.sayFloat( floatNumber, FLOAT_POINT_ONE, myDFPlayer );
   delay(500);
 
   for ( int32_t i = -3; i < 1023; i++ ) {

@@ -12,6 +12,10 @@
 #define MODE_SYNC   true
 #define MODE_ASYNC  false
 
+// define float precision: one digit or two digits after the dot
+#define FLOAT_POINT_ONE 10
+#define FLOAT_POINT_TWO 100
+
 // languages- names of folders on sdcard
 #define ENGLISH_MALE    10
 #define ENGLISH_FEMALE  11
@@ -66,7 +70,7 @@ class SayNumber {
       
     bool sayInteger( int32_t number, DFRobotDFPlayerMini& myDFPlayer );
 	
-	bool sayFloat( float number, DFRobotDFPlayerMini& myDFPlayer );
+	bool sayFloat( float number, uint8_t floatDecPrecision, DFRobotDFPlayerMini& myDFPlayer );
 
     bool sayAny( uint8_t say, DFRobotDFPlayerMini& myDFPlayer );
 

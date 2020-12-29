@@ -71,17 +71,21 @@ bool SayNumber::sayInteger( int32_t x, DFRobotDFPlayerMini& myDFPlayer ) {
 }
 
 
-bool SayNumber::sayFloat( float number, DFRobotDFPlayerMini& myDFPlayer ) {
+bool SayNumber::sayFloat( float number, uint8_t floatDecimalPrecision, DFRobotDFPlayerMini& myDFPlayer ) {
 	bool errorState = true;
 	
 	if( number < 0.0f ) {
 		errorState = sayAny( SAY_MINUS, myDFPlayer );
 		number = - number;
 	}
-
 	int32_t intPart = (int) number;
-	int32_t decPart = (int) (100*(number - intPart));
+	int32_t decPart = (int) ((number - intPart) * floatDecimalPrecision );
 	
+	#ifdef DEBUG
+		Serial.print( "Float Integer part: " ); Serial.println( intPart );
+		Serial.print( "Float Decimal part: " ); Serial.println( decPart );
+	#endif
+
 	errorState *= sayInteger( intPart, myDFPlayer );
 	errorState *= sayAny( SAY_POINT, myDFPlayer );
 	errorState *= sayInteger( decPart, myDFPlayer );
