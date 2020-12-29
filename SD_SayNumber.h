@@ -107,11 +107,11 @@ class SayNumber {
 
     void playerDelayWhilePlaying( void ); // hold on untill complete playing
 
-    uint8_t _busyPin = 0;
+    uint8_t _busyPin;
 
-    uint8_t _language = 10;
+    uint8_t _language;
 
-    bool _mode = MODE_SYNC;
+    bool _mode;
 
     Queue<uint8_t> playQueue = Queue<uint8_t>( QUEUE_LENGTH );
 };

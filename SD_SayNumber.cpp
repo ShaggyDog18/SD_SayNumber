@@ -30,12 +30,12 @@ bool SayNumber::sayInteger( int32_t x, DFRobotDFPlayerMini& myDFPlayer ) {
 
   if( x > MAX_NUMBER || x < -MAX_NUMBER ) 
     return false;  // the number is out of range
+  else if( x == 0 )
+    return sayAny( SAY_ZERO, myDFPlayer );  // say Zero
   else if( x < 0 ) {
-    errorState *= sayAny( SAY_MINUS, myDFPlayer );
+    errorState *= sayAny( SAY_MINUS, myDFPlayer );  // say Minus
     x = - x;
-  } else if( x == 0 ) {
-    return sayAny( SAY_ZERO, myDFPlayer );
-  } 
+  }
 
   // split a number to digits
   uint8_t decade = 0;
