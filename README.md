@@ -52,13 +52,13 @@ The main differentiator of the **SD_SayNumber** library is its ability to pronou
 
 It is important to maintain enough time for the whole audio message to be played in the async mode before the next message pops up to prevent the queue overflow. Otherwise, the message may be jammed. If so, call a **clearQueue()** method to resolve the issue and start over (refer to the [library example](https://github.com/ShaggyDog18/SD_SayNumber/blob/main/example/SayNumberSD/SayNumberSD.ino)).
 
-You may extend the length of the queue (in the SD_SayNumber.h file), but it's better to maintain the right timing between messages. Currently, the length of the queue is 18 bytes which is double of what is required to pronounce the lartgest integer number 999,999: *"nine hundred ninety nine thousand nine hundred ninety nine"* that engages nine MP3 files.
+You may extend the length of the queue (in the [SD_SayNumber.h](https://github.com/ShaggyDog18/SD_SayNumber/blob/main/SD_SayNumber.h) file), but it's better to maintain the right timing between messages. Currently, the length of the queue is 18 bytes which is double of what is required to pronounce the lartgest integer number 999,999: *"nine hundred ninety nine thousand nine hundred ninety nine"* that engages nine MP3 files.
 
 ### Synchronous Mode
 
 Playing messages in **Synchronous** mode means the main application cycle is blocked for the time while the entire message is being played.
 
-Both modes can be used in one application. Refer to the library example in which a synch mode is used in *setup()* function, while the asynch mode is used in the *loop()* function.
+Both modes can be used in one application. Refer to the [library example](https://github.com/ShaggyDog18/SD_SayNumber/blob/main/example/SayNumberSD/SayNumberSD.ino) in which a synch mode is used in *setup()* function, while the asynch mode is used in the *loop()* function.
 
 ## DFPlayer Connection
 
