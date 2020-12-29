@@ -168,8 +168,7 @@ void loop() {
 
 
   // at the end of your application loop:
-  // pronounce the message constructed above by geting MP3 files one by one from the play queue
-  // as soon as playing a file is finished.
+  // pronounce the message constructed above by geting MP3 files one by one from the play queue.
   // Returns *true* if player has started playing the next MP3 file from the queue.
   // Returns *false* if the player is still busy playing a message, or the queue is empty and there is nothing to play.
   playerStatus = Say.sayAsyncMode( myDFPlayer );
