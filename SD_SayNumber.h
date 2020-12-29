@@ -39,7 +39,7 @@
 #define RUSSIAN_FEMALE  91
 //--------------------------
 
-// extra numbers
+// extra audio files to pronounce numbers  
 #define SAY_HUNDRED  100
 #define SAY_THOUSAND 101
 #define SAY_ZERO  120
@@ -55,7 +55,7 @@
 #define SAY_PERCENT  127  // not in the library
 #define SAY_DEGREES  128  // not in the library
 
-// for clock - not in the library
+// for audio clock - not in the library
 #define SAY_HOUR     129
 #define SAY_MINUTES  130
 #define SAY_SECONDS  131
@@ -70,7 +70,7 @@ class SayNumber {
       
     bool sayInteger( int32_t number, DFRobotDFPlayerMini& myDFPlayer );
 	
-	bool sayFloat( float number, uint8_t floatDecPrecision, DFRobotDFPlayerMini& myDFPlayer );
+    bool sayFloat( float number, uint8_t floatDecimalPrecision, DFRobotDFPlayerMini& myDFPlayer );
 
     bool sayAny( uint8_t say, DFRobotDFPlayerMini& myDFPlayer );
 
@@ -92,9 +92,9 @@ class SayNumber {
       return _mode;
     }
 	
-	inline void clearQueue( void ){
-	  playQueue.clear();
-	}
+    inline void clearQueue( void ){
+      playQueue.clear();
+    }
 
   private:
     bool say1000( uint8_t digits[], DFRobotDFPlayerMini& myDFPlayer );
