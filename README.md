@@ -17,7 +17,7 @@ The library is compact and efficient, can run on uControllers with limited resou
 The library uses:
 - [DFRobot library for DFPlayer](https://github.com/DFRobot/DFRobotDFPlayerMini) - you need to download and set it up.
 - a slightly modified **Queue** application by [Steven de Salas](https://github.com/sdesalas/Arduino-Queue.h) - provided as part of the **SD_SayNumber** library.
-- Sets of MP3 voice files for *English* and *Ukrainian*, both *male* and *female* voices. Any language may be added by writing a corresponding set of audio files to the MicroSD card (please, refer to the *sdcard* folder structure and naming convention: 001.mp3 ... 255.mp3).
+- Sets of MP3 audio files for *English* and *Ukrainian*, both *male* and *female* voices. Any language may be added by writing a corresponding set of audio files to the MicroSD card (please, refer to the *sdcard* folder structure and naming convention: 001.mp3 ... 255.mp3).
 
 ## Library Methods
 
