@@ -38,10 +38,10 @@ void setup() {
 
   Serial.println(F("---Sync mode: block the cycle while is talking---"));
 
-  Serial.println(F("---Say Float number---"));
+  Serial.println(F("---Say Float numbers---"));
   float floatNumber = 175.35F;
   Serial.print( "Say:" ); Serial.print( floatNumber ); Serial.print( ":" );
-  Say.sayFloat( floatNumber, FLOAT_POINT_ONE, myDFPlayer );
+  Say.sayFloat( floatNumber, FLOAT_POINT_TWO, myDFPlayer );
   delay(500);
   
   floatNumber = -6.241F;
@@ -54,6 +54,8 @@ void setup() {
   Say.sayFloat( floatNumber, FLOAT_POINT_ONE, myDFPlayer );
   delay(500);
 
+  Serial.println(F("---Say Integer numbers---"));
+  
   for ( int32_t i = -3; i < 1023; i++ ) {
     Serial.print( "Say:" ); Serial.print(i); Serial.print( ":" );
     bool errorStatus = Say.sayInteger( i, myDFPlayer );
