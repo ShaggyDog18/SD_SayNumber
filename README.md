@@ -36,7 +36,7 @@ The library uses:
 
 - `uint8_t getLanguage(void)` - returns the current language.
 
-- `void setMode(bool mode)` - sets the mode, either synch or async. Use pre-defined constants *MODE_SYNC* or *MODE_ASYNC* correspondingly.
+- `void setMode(bool mode)` - sets the mode, either synch or async. Use predefined constants *MODE_SYNC* or *MODE_ASYNC* accordingly.
 
 - `bool getMode(void)`- returns the current mode.
 
