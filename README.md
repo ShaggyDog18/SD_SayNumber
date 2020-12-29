@@ -32,11 +32,11 @@ The library uses:
 
 - `bool sayAsyncMode(DFRobotDFPlayerMini& myDFPlayer)` - pronounces a pre-constructed message that may consist of several MP3 files in an asynchronous non-blocking mode. The message construction is performed by **sayNumber()** and **sayAny()** methods. Returns *true* if player has started playing MP3 file getting it from the queue. Returns *false* if the player is still busy playing a message, or the queue is empty and there is nothing to play.
 
-- `void setLanguage(uint8_t language)` - sets the language.
+- `void setLanguage(uint8_t language)` - sets the language. Refer to **SayNumber.h** for the supported list of languages. 
 
 - `uint8_t getLanguage(void)` - returns the current language.
 
-- `void setMode(bool mode)` - sets the mode, either synch or async.
+- `void setMode(bool mode)` - sets the mode, either synch or async. Use pre-defined constants *MODE_SYNC* or *MODE_ASYNC* correspondingly.
 
 - `bool getMode(void)`- returns the current mode.
 
