@@ -12,7 +12,7 @@ Any prefix/postfix messages can be easily added. So far, meters, kilometers and 
 
 The library is compact and efficient, can run on uControllers with limited resources.
 
-Inhale life to your applications :-)
+Inhale life to your applications :-) If you have sets of voice MP3 files for other languages, please, share. I would be glad to include them to the library! Thank you!
 
 ## Resources
 
@@ -70,6 +70,10 @@ For more details on the library use, please, refer to the example that utilizes 
 ## Compatibility
 
 The library was developed for Arduino UNO/NANO/Pro Mini, ESP8266, ESP32, STM32, etc.
+
+## Please, contribute! 
+
+If you have sets of voice MP3 files for other languages, please, share. I would be glad to include them to the library! Thank you!
 
 ## Gratitude
 
