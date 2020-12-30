@@ -2,11 +2,12 @@
 
 #include <Arduino.h>
 #include "DFRobotDFPlayerMini.h"
-#include "Queue.h"
 
 #define N_DIGITS     6  // max number 999,999
 #define MAX_NUMBER   999999
 #define QUEUE_LENGTH 18 // digits
+
+#include "Queue.h"
 
 // modes
 #define MODE_SYNC   true
@@ -67,9 +68,9 @@
 class SayNumber {
   public:
     SayNumber( uint8_t busyPin = 0, uint8_t language = ENGLISH_MALE, bool mode = MODE_SYNC );
-      
+
     bool sayInteger( int32_t number, DFRobotDFPlayerMini& myDFPlayer );
-	
+
     bool sayFloat( float number, uint8_t floatDecimalPrecision, DFRobotDFPlayerMini& myDFPlayer );
 
     bool sayAny( uint8_t say, DFRobotDFPlayerMini& myDFPlayer );
@@ -91,7 +92,7 @@ class SayNumber {
     inline bool getMode( void ){
       return _mode;
     }
-	
+
     inline void clearQueue( void ){
       playQueue.clear();
     }

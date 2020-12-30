@@ -73,7 +73,7 @@ bool SayNumber::sayInteger( int32_t x, DFRobotDFPlayerMini& myDFPlayer ) {
 
 bool SayNumber::sayFloat( float number, uint8_t floatDecimalPrecision, DFRobotDFPlayerMini& myDFPlayer ) {
 	bool errorState = true;
-	
+
 	if( number < 0.0f ) {
 		errorState = sayAny( SAY_MINUS, myDFPlayer );
 		number = - number;
@@ -107,7 +107,7 @@ bool SayNumber::say1000( uint8_t digits[], DFRobotDFPlayerMini& myDFPlayer ) {
 
 bool SayNumber::say100( uint8_t digits[], DFRobotDFPlayerMini& myDFPlayer ) {
   bool errorState;
-  
+
   switch( _language ) {
     case UKRAINIAN_MALE:
     case UKRAINIAN_FEMALE:
@@ -117,7 +117,7 @@ bool SayNumber::say100( uint8_t digits[], DFRobotDFPlayerMini& myDFPlayer ) {
     case RUSSIAN_FEMALE:
       errorState = sayAny( 200+digits[0], myDFPlayer );  // 100, 200, 300, 400,...900 recorded to files 201, 201, 203, 204, 209 correspondigly
       break;
-      
+
     default:  // ENGLISH, SPANISH, ITALIAN....
       errorState = say1( &digits[0], myDFPlayer );
       if( digits[0] ) {
