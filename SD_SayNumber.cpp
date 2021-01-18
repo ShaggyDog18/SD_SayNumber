@@ -171,7 +171,7 @@ bool SayNumber::say1( uint8_t digits[], DFRobotDFPlayerMini& myDFPlayer ) {
 
 
 void SayNumber::playerDelayWhilePlaying( void ) {
-  delay(100);
+  delay(110);
   if( _busyPin ) {
     while( !digitalRead( _busyPin ) ){  // low means busy
       delay(10);
