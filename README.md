@@ -8,7 +8,7 @@ License: [GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/)
 
 The library allows to pronounce both integer numbers in the range of **-999,999** to **999,999** and float numbers in range of **-999,999.99** to **999,999.99** in English or Ukrainian, male or female voices by a [DFPlayer MP3 audio Player](https://www.dfrobot.com/index.php?route=product/product&product_id=1121) in a **synchronous** (blocking) or **asynchronous** (non-blocking) modes.
 
-Any prefix/postfix messages can be easily added. So far, meters, kilometers and miles are included to the set of MP3 files provided in the [sdcard folder](https://github.com/ShaggyDog18/SD_SayNumber/tree/main/sdcard).
+Any prefix/postfix voice messages can be easily added. So far, meters, kilometers and miles are included to the set of MP3 files provided in the [sdcard folder](https://github.com/ShaggyDog18/SD_SayNumber/tree/main/sdcard).
 
 The library is compact and efficient, can run on uControllers with limited resources.
 
