@@ -1,6 +1,6 @@
 # SD_SayNumber Library for DFPlayer
 
-by **ShaggyDog18@gmail.com**, DEC 2020
+by **ShaggyDog18@gmail.com**, FEB 2021
 
 github: https://github.com/ShaggyDog18/SD_SayNumber
 
