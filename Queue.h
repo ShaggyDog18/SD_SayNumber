@@ -8,6 +8,8 @@
  * 
  * Modified and optimized by ShaggyDog18@gmail.com
  *
+ * IMPORTANT: define the queue lenght by #define QUEUE_LENGTH right before including Queue.h 
+ *
  */
 
 #pragma once
