@@ -10,7 +10,7 @@
  *
  */
 
-#pragma once 
+#pragma once
 
 #include <Arduino.h>
 
@@ -44,24 +44,18 @@ class Queue {
 };
 
 template<class T>
-inline uint8_t Queue<T>::count( void ) {
-  return _count;
-}
+inline uint8_t Queue<T>::count( void ) { return _count; }
 
 template<class T>
-inline uint8_t Queue<T>::front( void ) {
-  return _front;
-}
+inline uint8_t Queue<T>::front( void ) { return _front; }
 
 template<class T>
-inline uint8_t Queue<T>::back( void ) {
-  return _back;
-}
+inline uint8_t Queue<T>::back( void ) { return _back; }
 
 template<class T>
 bool Queue<T>::push(const T &item) {  // ShaggyDog: changed return value to bool
   if(_count < _maxitems) { // Drops out when full
-    _data[_back++]=item;
+    _data[_back++] = item;
     _count++;
     // Check wrap around
     if( _back >= _maxitems ) _back = 0;
@@ -78,7 +72,8 @@ bool Queue<T>::push(const T &item) {  // ShaggyDog: changed return value to bool
 
 template<class T>
 T Queue<T>::pop( void ) {
-  if( !_count ) return T(); // Returns empty
+  if( !_count ) 
+    return T(); // Returns empty
   else {
     T result = _data[_front++];
     _count--;
@@ -90,8 +85,10 @@ T Queue<T>::pop( void ) {
 
 template<class T>
 T Queue<T>::peek( void ) {
-  if( !_count ) return T(); // Returns empty
-  else return _data[_front];
+  if( !_count ) 
+    return T(); // Returns empty
+  else 
+    return _data[_front];
 }
 
 template<class T>
