@@ -43,7 +43,7 @@ bool SayNumber::sayInteger( int32_t x, DFRobotDFPlayerMini& myDFPlayer ) {
     digits[N_DIGITS - decade - 1] = x % 10;
     decade++;
     x /= 10;
-  } while ( x > 0 );
+  } while( x > 0 );
   decade--;
   /*
         Serial.print("~");
@@ -181,7 +181,7 @@ void SayNumber::playerDelayWhilePlaying( void ) {
 
 
 bool SayNumber::sayAsyncMode( DFRobotDFPlayerMini& myDFPlayer ) {
-  // if query is not empty && digitalRead( _busyPin )  
+  // if query is not empty && digitalRead( _busyPin )  // low means busy
   if( playQueue.count() && digitalRead(_busyPin) ) {
     myDFPlayer.playFolder( _language, playQueue.pop() );
     return true;
