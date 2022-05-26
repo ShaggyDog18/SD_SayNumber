@@ -1,6 +1,7 @@
 # SD_SayNumber Library for DFPlayer
 
 by **ShaggyDog18@gmail.com**, FEB-2021. Updated on MAY-2022
+**Version 2.0**
 
 github: https://github.com/ShaggyDog18/SD_SayNumber
 
@@ -16,8 +17,8 @@ Inhale life to your applications :-) If you have sets of voice MP3 files for oth
 
 ## Releases
 
-- FEB-2021 - initial release
-- MAY-2022 - major update: simplified and optimized the library by inheriting all methods of **DFPlayer** class instead of having it as a separate object and passing its reference to all library functions. 
+- FEB-2021 - initial release **version 1.0**
+- MAY-2022 - **version 2.0** major update: simplified and optimized the library by inheriting all methods of **DFPlayer** class instead of having it as a separate object and passing its reference to all library functions. 
 So, if you use an initial release, you need to update all **Say** methods by simply removing references to **DFPlayer**. Also, all functions of DFPlayer are inherited by the library. Please, refer to Examples on how to update your code.
 
 ## Resources
