@@ -1,6 +1,6 @@
 # SD_SayNumber Library for DFPlayer
 
-by **ShaggyDog18@gmail.com**, FEB 2021
+by **ShaggyDog18@gmail.com**, FEB-2021. Updated on MAY-2022
 
 github: https://github.com/ShaggyDog18/SD_SayNumber
 
@@ -14,6 +14,12 @@ The library is compact and efficient, can run on uControllers with limited resou
 
 Inhale life to your applications :-) If you have sets of voice MP3 files for other languages, please, share. I would be glad to include them to the library! Thank you!
 
+## Releases
+
+- FEB-2021 - initial release
+- MAY-2022 - major update: simplified and optimized the library by inheriting all methods of **DFPlayer** class instead of having it as a separate object and passing its reference to all library functions. 
+So, if you use an initial release, you need to update all **Say** methods by simply removing references to **DFPlayer**. Also, all functions of DFPlayer are inherited by the library. Please, refer to Examples on how to update your code.
+
 ## Resources
 
 The library uses:
@@ -25,14 +31,14 @@ The library uses:
 
 - `SayNumber(uint8_t busyPin, uint8_t language, bool mode)` - Class Constructor, defines *Busy* pin, *language* and *play mode*.
 
-- `bool sayInteger(int32_t number, DFRobotDFPlayerMini& myDFPlayer)` - pronounces integer numbers in the range of *-999,999* to *999,999* (6 digits lenghts). Returns *true* if a message was played OK (in sync mode) or queue is not overflowed (in asynchronous mode). Returns *false* if playing issues or the queue is full in async mode.
+- `bool sayInteger(int32_t number)` - pronounces integer numbers in the range of *-999,999* to *999,999* (6 digits lenghts). Returns *true* if a message was played OK (in sync mode) or queue is not overflowed (in asynchronous mode). Returns *false* if playing issues or the queue is full in async mode.
 
-- `bool sayFloat(float number, uint8_t floatDecimalPrecision, DFRobotDFPlayerMini& myDFPlayer)` - pronounces float numbers in the range of *-999,999.99* to *999,999.99* (6 digits integer part and either one or two digits decimal part). Use a float decimal precision constant *FLOAT_POINT_ONE* for one digit after the dot, or *FLOAT_POINT_TWO* for two digits. Returns *true* if a message was played OK (in sync mode) or queue is not overflowed (in asynchronous mode). Returns *false* if playing issues or the queue is full in async mode. 
+- `bool sayFloat(float number, uint8_t floatDecimalPrecision)` - pronounces float numbers in the range of *-999,999.99* to *999,999.99* (6 digits integer part and either one or two digits decimal part). Use a float decimal precision constant *FLOAT_POINT_ONE* for one digit after the dot, or *FLOAT_POINT_TWO* for two digits. Returns *true* if a message was played OK (in sync mode) or queue is not overflowed (in asynchronous mode). Returns *false* if playing issues or the queue is full in async mode. 
 **Note:** Be aware, that adding *float* variables to your application will result in immediate increase of the sketch size by ~2.5kBytes. Try to avoid *float* data type if uController's resources are scarce.  
 
-- `bool sayAny(uint8_t say, DFRobotDFPlayerMini& myDFPlayer)` - pronounces any MP3 file/message by its number; mp3 files should be named as 001.mp3-255.mp3 according to DFPlayer message naming convention (please, refer to the player [datasheet](https://github.com/DFRobot/DFRobotDFPlayerMini/blob/master/doc/FN-M16P%2BEmbedded%2BMP3%2BAudio%2BModule%2BDatasheet.pdf)). Usually **sayAny** method is used to pronounce prefix/postfix for the number like meters/kilometers/miles, etc. Returns *true* if a message was played OK (in synch mode), or the queue is not overflowed (in the async mode). Returns *false* if issues or the queue is full.
+- `bool sayAny(uint8_t say)` - pronounces any MP3 file/message by its number; mp3 files should be named as 001.mp3-255.mp3 according to DFPlayer message naming convention (please, refer to the player [datasheet](https://github.com/DFRobot/DFRobotDFPlayerMini/blob/master/doc/FN-M16P%2BEmbedded%2BMP3%2BAudio%2BModule%2BDatasheet.pdf)). Usually **sayAny** method is used to pronounce prefix/postfix for the number like meters/kilometers/miles, etc. Returns *true* if a message was played OK (in synch mode), or the queue is not overflowed (in the async mode). Returns *false* if issues or the queue is full.
 
-- `bool sayAsyncMode(DFRobotDFPlayerMini& myDFPlayer)` - pronounces a pre-constructed message that may consist of several MP3 files in an asynchronous non-blocking mode. The message construction is performed by **sayNumber()** and **sayAny()** methods. Returns *true* if player has started playing MP3 file getting it from the queue. Returns *false* if the player is still busy playing a message, or the queue is empty and there is nothing to play.
+- `bool sayAsyncMode(void)` - pronounces a pre-constructed message that may consist of several MP3 files in an asynchronous non-blocking mode. The message construction is performed by **sayNumber()** and **sayAny()** methods. Returns *true* if player has started playing MP3 file getting it from the queue. Returns *false* if the player is still busy playing a message, or the queue is empty and there is nothing to play.
 
 - `void setLanguage(uint8_t language)` - sets the language. Refer to **SayNumber.h** for the supported list of languages. 
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Arduino.h>
-#include "DFRobotDFPlayerMini.h"
+#include <DFRobotDFPlayerMini.h>
 
 #define N_DIGITS     6  // max number 999,999
 #define MAX_NUMBER   999999
@@ -65,46 +65,36 @@
 // .... up to 255.mp3
 
 
-class SayNumber {
+class SayNumber : public DFRobotDFPlayerMini {
   public:
     SayNumber( uint8_t busyPin = 0, uint8_t language = ENGLISH_MALE, bool mode = MODE_SYNC );
 
-    bool sayInteger( int32_t number, DFRobotDFPlayerMini& myDFPlayer );
+    bool sayInteger( int32_t number );
 
-    bool sayFloat( float number, uint8_t floatDecimalPrecision, DFRobotDFPlayerMini& myDFPlayer );
+    bool sayFloat( float number, uint8_t floatDecimalPrecision);
 
-    bool sayAny( uint8_t say, DFRobotDFPlayerMini& myDFPlayer );
+    bool sayAny( uint8_t say );
 
-    bool sayAsyncMode( DFRobotDFPlayerMini& myDFPlayer );
+    bool sayAsyncMode(void);
 
-    inline void setLanguage( uint8_t language ){
-      _language = language;
-    }
+    inline void setLanguage( uint8_t language ){ _language = language; }
 
-    inline uint8_t getLanguage ( void ){
-      return _language;
-    }
+    inline uint8_t getLanguage ( void ){ return _language; }
 
-    inline void setMode( bool mode ){
-      _mode = mode;
-    }
+    inline void setMode( bool mode ){ _mode = mode; }
 
-    inline bool getMode( void ){
-      return _mode;
-    }
+    inline bool getMode( void ){ return _mode; }
 
-    inline void clearQueue( void ){
-      playQueue.clear();
-    }
+    inline void clearQueue( void ){ playQueue.clear(); }
 
   private:
-    bool say1000( uint8_t digits[], DFRobotDFPlayerMini& myDFPlayer );
+    bool say1000( uint8_t digits[] );
 
-    bool say100( uint8_t digits[], DFRobotDFPlayerMini& myDFPlayer );
+    bool say100( uint8_t digits[] );
 
-    bool say10( uint8_t digits[], DFRobotDFPlayerMini& myDFPlayer );
+    bool say10( uint8_t digits[] );
 
-    bool say1( uint8_t digits[], DFRobotDFPlayerMini& myDFPlayer );
+    bool say1( uint8_t digits[] );
 
     void playerDelayWhilePlaying( void ); // hold on untill complete playing
 
@@ -114,5 +104,5 @@ class SayNumber {
 
     bool _mode;
 
-    Queue<uint8_t> playQueue = Queue<uint8_t>( QUEUE_LENGTH );
+    Queue<uint8_t, QUEUE_LENGTH> playQueue;// = Queue<uint8_t>( QUEUE_LENGTH );
 };

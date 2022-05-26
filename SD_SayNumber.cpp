@@ -12,10 +12,10 @@ SayNumber::SayNumber( uint8_t busyPin, uint8_t language, bool mode ): _busyPin(b
 }
 
 
-bool SayNumber::sayAny( uint8_t say, DFRobotDFPlayerMini& myDFPlayer ) {
+bool SayNumber::sayAny( uint8_t say ) {
   bool errorState = true;
   if( _mode ) {
-    myDFPlayer.playFolder( _language, say ); //play specific mp3 in SD:/15/004.mp3; Folder Name(1~99); File Name(1~255)
+    playFolder( _language, say ); //play specific mp3 in SD:/15/004.mp3; Folder Name(1~99); File Name(1~255)
     playerDelayWhilePlaying();
   } else {
     errorState = playQueue.push( say );
@@ -24,16 +24,16 @@ bool SayNumber::sayAny( uint8_t say, DFRobotDFPlayerMini& myDFPlayer ) {
 }
 
 
-bool SayNumber::sayInteger( int32_t x, DFRobotDFPlayerMini& myDFPlayer ) {
+bool SayNumber::sayInteger( int32_t x ) {
   uint8_t digits[N_DIGITS] = {0, 0, 0, 0, 0, 0};  // max number 999,999; 
   bool errorState = true; // true - means OK, no error
 
   if( x > MAX_NUMBER || x < -MAX_NUMBER ) 
     return false;  // the number is out of range
   else if( x == 0 )
-    return sayAny( SAY_ZERO, myDFPlayer );  // say Zero
+    return sayAny( SAY_ZERO );  // say Zero
   else if( x < 0 ) {
-    errorState = sayAny( SAY_MINUS, myDFPlayer );  // say Minus
+    errorState = sayAny( SAY_MINUS );  // say Minus
     x = - x;
   }
 
@@ -51,15 +51,15 @@ bool SayNumber::sayInteger( int32_t x, DFRobotDFPlayerMini& myDFPlayer ) {
         Serial.print("::");
   */
   switch( decade ) { // !!!no breaks!!!
-    case 5: errorState *= say100( &digits[0], myDFPlayer );
+    case 5: errorState *= say100( &digits[0] );
 
     case 4:
-    case 3: errorState *= say1000( &digits[1], myDFPlayer );
+    case 3: errorState *= say1000( &digits[1] );
 
-    case 2: errorState *= say100( &digits[3], myDFPlayer );
+    case 2: errorState *= say100( &digits[3] );
 
     case 1:
-    case 0: errorState *= say10( &digits[4], myDFPlayer );
+    case 0: errorState *= say10( &digits[4] );
   }
 
   #ifdef DEBUG
@@ -71,11 +71,11 @@ bool SayNumber::sayInteger( int32_t x, DFRobotDFPlayerMini& myDFPlayer ) {
 }
 
 
-bool SayNumber::sayFloat( float number, uint8_t floatDecimalPrecision, DFRobotDFPlayerMini& myDFPlayer ) {
+bool SayNumber::sayFloat( float number, uint8_t floatDecimalPrecision ) {
 	bool errorState = true;
 
 	if( number < 0.0f ) {
-		errorState = sayAny( SAY_MINUS, myDFPlayer );
+		errorState = sayAny( SAY_MINUS );
 		number = - number;
 	}
 	int32_t intPart = (int) number;
@@ -86,26 +86,26 @@ bool SayNumber::sayFloat( float number, uint8_t floatDecimalPrecision, DFRobotDF
 		Serial.print( "Float Decimal part: " ); Serial.println( decPart );
 	#endif
 
-	errorState *= sayInteger( intPart, myDFPlayer );
-	errorState *= sayAny( SAY_POINT, myDFPlayer );
-	errorState *= sayInteger( decPart, myDFPlayer );
+	errorState *= sayInteger( intPart );
+	errorState *= sayAny( SAY_POINT );
+	errorState *= sayInteger( decPart );
 	return errorState;
 }
 
 
-bool SayNumber::say1000( uint8_t digits[], DFRobotDFPlayerMini& myDFPlayer ) {
+bool SayNumber::say1000( uint8_t digits[] ) {
   bool errorState;
 
-  errorState = say10( &digits[0], myDFPlayer );
+  errorState = say10( &digits[0] );
   #ifdef DEBUG
     Serial.print( " thousand " );
   #endif
-  errorState *= sayAny( SAY_THOUSAND, myDFPlayer );
+  errorState *= sayAny( SAY_THOUSAND );
   return errorState;
 }
 
 
-bool SayNumber::say100( uint8_t digits[], DFRobotDFPlayerMini& myDFPlayer ) {
+bool SayNumber::say100( uint8_t digits[] ) {
   bool errorState;
 
   switch( _language ) {
@@ -115,48 +115,48 @@ bool SayNumber::say100( uint8_t digits[], DFRobotDFPlayerMini& myDFPlayer ) {
     case POLISH_FEMALE:
     case RUSSIAN_MALE:
     case RUSSIAN_FEMALE:
-      errorState = sayAny( 200+digits[0], myDFPlayer );  // 100, 200, 300, 400,...900 recorded to files 201, 201, 203, 204, 209 correspondigly
+      errorState = sayAny( 200+digits[0] );  // 100, 200, 300, 400,...900 recorded to files 201, 201, 203, 204, 209 correspondigly
       break;
 
     default:  // ENGLISH, SPANISH, ITALIAN....
-      errorState = say1( &digits[0], myDFPlayer );
+      errorState = say1( &digits[0] );
       if( digits[0] ) {
 		#ifdef DEBUG
 			Serial.print( " hundred " );
 		#endif
-        errorState *= sayAny( SAY_HUNDRED, myDFPlayer );
+        errorState *= sayAny( SAY_HUNDRED );
       }
   }
   return errorState;
 }
 
 
-bool SayNumber::say10( uint8_t digits[], DFRobotDFPlayerMini& myDFPlayer ) {
+bool SayNumber::say10( uint8_t digits[] ) {
   bool errorState;
 
   if( digits[0] == 0 )  // 1...9
-    errorState = say1( &digits[1], myDFPlayer ); 
+    errorState = say1( &digits[1] ); 
   else if( digits[0] == 1 ) { //11-19
     #ifdef DEBUG
       sprintf(temp, "%03d", 10 + digits[1] );
       Serial.print( temp ); //10-19
       Serial.print( "." );
     #endif
-    errorState = sayAny(  10+digits[1], myDFPlayer );
+    errorState = sayAny(  10+digits[1] );
   } else {  //20,30,40...90
     #ifdef DEBUG
       sprintf(temp, "%03d", 10*digits[0] );
       Serial.print( temp ); //20, 30...90
       Serial.print( "^" );
     #endif
-    errorState = sayAny( 10*digits[0], myDFPlayer );
-    errorState *= say1( &digits[1], myDFPlayer );  // 1...9
+    errorState = sayAny( 10*digits[0] );
+    errorState *= say1( &digits[1] );  // 1...9
   }
   return errorState;
 }
 
 
-bool SayNumber::say1( uint8_t digits[], DFRobotDFPlayerMini& myDFPlayer ) {
+bool SayNumber::say1( uint8_t digits[] ) {
   bool errorState = true;
   if( digits[0] ) {
     #ifdef DEBUG
@@ -164,7 +164,7 @@ bool SayNumber::say1( uint8_t digits[], DFRobotDFPlayerMini& myDFPlayer ) {
       Serial.print(temp);
       Serial.print( "-" );
     #endif
-    errorState = sayAny( digits[0], myDFPlayer );
+    errorState = sayAny( digits[0] );
   } 
   return errorState;
 }
@@ -180,10 +180,10 @@ void SayNumber::playerDelayWhilePlaying( void ) {
 }
 
 
-bool SayNumber::sayAsyncMode( DFRobotDFPlayerMini& myDFPlayer ) {
+bool SayNumber::sayAsyncMode(void) {
   // if query is not empty && digitalRead( _busyPin )  // low means busy
   if( playQueue.count() && digitalRead(_busyPin) ) {
-    myDFPlayer.playFolder( _language, playQueue.pop() );
+    playFolder( _language, playQueue.pop() );
     return true;
   }
   return false;
